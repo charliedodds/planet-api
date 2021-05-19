@@ -1,20 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const planets = require('../planets');
 
-const app = express();
-const planets = require('./planets');
-
-app.use(bodyParser.json());
-app.use(cors({ allow: true }));
-
-const port = process.env.PORT || 3000;
-
-app.get('/planets', (req, res) => {
+exports.index = (req, res) => {
   res.status(200).send(planets);
-});
+};
 
-app.get('/planets/:id', (req, res) => {
+exports.getPlanet = (req, res) => {
   const id = Number(req.params.id);
   const result = planets.filter((planet) => planet.id === id);
   if (result.length) {
@@ -22,9 +12,9 @@ app.get('/planets/:id', (req, res) => {
   } else {
     res.status(404).send({ message: 'Error: No planets with that ID found' });
   }
-});
+};
 
-app.post('/planets', (req, res) => {
+exports.createPlanet = (req, res) => {
   let planetToAdd = {};
   if (typeof req.body.hasKnownLife === 'boolean') {
     planetToAdd = {
@@ -61,9 +51,9 @@ app.post('/planets', (req, res) => {
   } else {
     res.status(400).send({ message: 'Unable to create planet' });
   }
-});
+};
 
-app.put('/planets/:id', (req, res) => {
+exports.updatePlanet = (req, res) => {
   const id = Number(req.params.id);
   const indexToUpdate = planets.findIndex((planet) => planet.id === id);
   if (indexToUpdate >= 0) {
@@ -95,9 +85,9 @@ app.put('/planets/:id', (req, res) => {
   } else {
     res.status(400).send({ message: 'Unable to update planet.' });
   }
-});
+};
 
-app.delete('/planets/:id', (req, res) => {
+exports.deletePlanet = (req, res) => {
   const id = Number(req.params.id);
   const indexToDelete = planets.findIndex((planet) => planet.id === id);
   if (indexToDelete >= 0) {
@@ -110,8 +100,4 @@ app.delete('/planets/:id', (req, res) => {
       .status(400)
       .send({ message: 'Unable to delete planet. Invalid planet id' });
   }
-});
-
-app.listen(port, () => {
-  console.log(`express app listening on port ${port}`);
-});
+};
