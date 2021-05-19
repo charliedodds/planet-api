@@ -1,59 +1,60 @@
 const planets = [
   {
     id: 1,
-    name: "mercury",
+    name: 'mercury',
     hasKnownLife: false,
-    type: "terrestrial",
-    noOfMoons: 0
+    type: 'terrestrial',
+    noOfMoons: 0,
   },
   {
     id: 2,
-    name: "venus",
+    name: 'venus',
     hasKnownLife: false,
-    type: "terrestrial",
-    noOfMoons: 0
+    type: 'terrestrial',
+    noOfMoons: 0,
   },
   {
     id: 3,
-    name: "earth",
+    name: 'earth',
     hasKnownLife: true,
-    type: "terrestrial",
-    noOfMoons: 1
+    type: 'terrestrial',
+    noOfMoons: 1,
   },
   {
     id: 4,
-    name: "mars",
+    name: 'mars',
     hasKnownLife: false,
-    type: "terrestrial",
-    noOfMoons: 2
+    type: 'terrestrial',
+    noOfMoons: 2,
   },
   {
     id: 5,
-    name: "jupiter",
+    name: 'jupiter',
     hasKnownLife: false,
-    type: "gas giant",
-    noOfMoons: 59
+    type: 'gas giant',
+    noOfMoons: 59,
   },
   {
     id: 6,
-    name: "saturn",
+    name: 'saturn',
     hasKnownLife: false,
-    type: "gas giant",
-    noOfMoons: 53
+    type: 'gas giant',
+    noOfMoons: 53,
   },
   {
     id: 7,
-    name: "uranus",
+    name: 'uranus',
     hasKnownLife: false,
-    type: "gas giant",
-    noOfMoons: 27
+    type: 'gas giant',
+    noOfMoons: 27,
   },
   {
     id: 8,
-    name: "neptune",
+    name: 'neptune',
     hasKnownLife: false,
-    type: "gas giant",
-    noOfMoons: 14
-  }
+    type: 'gas giant',
+    noOfMoons: 14,
+  },
 ];
+
 module.exports = planets;
