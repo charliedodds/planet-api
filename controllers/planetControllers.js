@@ -2,27 +2,17 @@
 const Planet = require('../models/planets');
 
 exports.index = (req, res, next) => {
-  // res.status(200).send(planets);
-  Planet.find()
-    .sort([['id', 'ascending']])
-    .exec((err, planets) => {
-      if (err) return next(err);
-      res.status(200).send(planets);
-    });
+  Planet.find().exec((err, planets) => {
+    if (err) return next(err);
+    res.status(200).send(planets);
+  });
 };
 
 exports.getPlanet = (req, res, next) => {
-  const id = Number(req.params.id);
-  // const result = planets.filter((planet) => planet.id === id);
   Planet.findById(req.params.id).exec((err, planet) => {
     if (err) return next(err);
     res.status(200).send(planet);
   });
-  // if (result.length) {
-  //   res.status(200).send(planets.filter((planet) => planet.id === id));
-  // } else {
-  //   res.status(404).send({ message: 'Error: No planets with that ID found' });
-  // }
 };
 
 exports.createPlanet = (req, res, next) => {
@@ -33,7 +23,7 @@ exports.createPlanet = (req, res, next) => {
       hasKnownLife: req.body.hasKnownLife,
       type: String(req.body.type),
       noOfMoons: Number(req.body.noOfMoons),
-      // ...req.body,
+      imgURL: String(req.body.imgURL),
     };
   }
   // get current highest id from data
@@ -44,10 +34,17 @@ exports.createPlanet = (req, res, next) => {
   // check planetToAdd is same shape
   const planetKeys = Object.keys(planetToAdd);
   if (
-    planetKeys.length === 4 &&
-    planetKeys.includes('name', 'hasKnownLife', 'type', 'noOfMoons') &&
+    planetKeys.length === 5 &&
+    planetKeys.includes(
+      'name',
+      'hasKnownLife',
+      'type',
+      'noOfMoons',
+      'imgURL'
+    ) &&
     planetToAdd.name &&
     planetToAdd.type &&
+    planetToAdd.imgURL &&
     planetToAdd.noOfMoons >= 0
   ) {
     // attach new id to planet
@@ -78,15 +75,22 @@ exports.updatePlanet = (req, res, next) => {
       hasKnownLife: req.body.hasKnownLife,
       type: String(req.body.type),
       noOfMoons: Number(req.body.noOfMoons),
-      // ...req.body,
+      imgUrl: String(req.body.imgURL),
     };
   }
   const planetKeys = Object.keys(planetToUpdate);
   if (
-    planetKeys.length === 4 &&
-    planetKeys.includes('name', 'hasKnownLife', 'type', 'noOfMoons', 'id') &&
+    planetKeys.length === 5 &&
+    planetKeys.includes(
+      'name',
+      'hasKnownLife',
+      'type',
+      'noOfMoons',
+      'imgURL'
+    ) &&
     planetToUpdate.name &&
     planetToUpdate.type &&
+    planetToUpdate.imgURL &&
     planetToUpdate.noOfMoons >= 0
   ) {
     // planetToUpdate.id = id;
